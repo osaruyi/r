@@ -15,3 +15,10 @@ variable "dub_subnet_cidr" {
 }
 
 variable "dub_rttable_cidr" {}
+
+variable "dub_ami" {}
+
+variable "dub_servername" {}
+
+# variable "dub_secgrp_id" {}
+

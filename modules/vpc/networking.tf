@@ -1,7 +1,7 @@
 provider "aws" {
- access_key = "${var.vpc_access_key}"
- secret_key = "${var.vpc_secret_key}"
- region     = "${var.vpc_region}"
+  access_key = "${var.vpc_access_key}"
+  secret_key = "${var.vpc_secret_key}"
+  region     = "${var.vpc_region}"
 }
 
 resource "aws_vpc" "main" {
@@ -13,8 +13,7 @@ resource "aws_vpc" "main" {
   }
 }
 
-
-resource "aws_subnet" "main" {
+resource "aws_subnet" "subnets" {
   count             = "${length(data.aws_availability_zones.availzone.names)}"
   vpc_id            = "${var.vpc_id}"
   cidr_block        = "${element(var.subnet_cidr, count.index)}"
@@ -25,11 +24,10 @@ resource "aws_subnet" "main" {
   }
 }
 
-
 output "vpc_id" {
- value = "${aws_vpc.main.id}"
+  value = "${aws_vpc.main.id}"
 }
 
 output "subnet_id" {
-value = "${aws_subnet.main.*.id}"
+  value = "${aws_subnet.subnets.*.id}"
 }
